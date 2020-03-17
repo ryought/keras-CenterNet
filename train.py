@@ -308,7 +308,8 @@ def main(args=None):
 
     # create the model
     print('Loading model, this may take a second...')
-    model.load_weights(args.snapshot, by_name=True, skip_mismatch=True)
+    # model.load_weights(args.snapshot, by_name=True, skip_mismatch=True)
+    model.load_weights(args.snapshot, by_name=True)
 
     # freeze layers
     if args.freeze_backbone:
