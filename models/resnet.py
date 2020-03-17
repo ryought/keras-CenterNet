@@ -3,7 +3,7 @@ from tensorflow.keras.applications.resnet50 import ResNet50
 from tensorflow.keras.layers import Input, Conv2DTranspose, BatchNormalization, ReLU, Conv2D, Lambda, MaxPooling2D, Dropout
 from tensorflow.keras.layers import ZeroPadding2D
 from tensorflow.keras.models import Model
-from tensorflow.keras.initializers import normal, constant, zeros
+# from tensorflow.keras.initializers import normal, constant, zeros
 from tensorflow.keras.regularizers import l2
 import tensorflow.keras.backend as K
 import tensorflow as tf
