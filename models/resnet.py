@@ -1,11 +1,11 @@
-from keras_resnet import models as resnet_models
-from keras.applications.resnet50 import ResNet50
-from keras.layers import Input, Conv2DTranspose, BatchNormalization, ReLU, Conv2D, Lambda, MaxPooling2D, Dropout
-from keras.layers import ZeroPadding2D
-from keras.models import Model
-from keras.initializers import normal, constant, zeros
-from keras.regularizers import l2
-import keras.backend as K
+# from keras_resnet import models as resnet_models
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.layers import Input, Conv2DTranspose, BatchNormalization, ReLU, Conv2D, Lambda, MaxPooling2D, Dropout
+from tensorflow.keras.layers import ZeroPadding2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.initializers import normal, constant, zeros
+from tensorflow.keras.regularizers import l2
+import tensorflow.keras.backend as K
 import tensorflow as tf
 
 from losses import loss
@@ -124,16 +124,20 @@ def centernet(num_classes, backbone='resnet50', input_size=512, max_objects=100,
     index_input = Input(shape=(max_objects,))
 
     if backbone == 'resnet18':
-        resnet = resnet_models.ResNet18(image_input, include_top=False, freeze_bn=freeze_bn)
+        # resnet = resnet_models.ResNet18(image_input, include_top=False, freeze_bn=freeze_bn)
+        raise NotImplementedError
     elif backbone == 'resnet34':
-        resnet = resnet_models.ResNet34(image_input, include_top=False, freeze_bn=freeze_bn)
+        # resnet = resnet_models.ResNet34(image_input, include_top=False, freeze_bn=freeze_bn)
+        raise NotImplementedError
     elif backbone == 'resnet50':
-        resnet = resnet_models.ResNet50(image_input, include_top=False, freeze_bn=freeze_bn)
-        # resnet = ResNet50(input_tensor=image_input, include_top=False)
+        # resnet = resnet_models.ResNet50(image_input, include_top=False, freeze_bn=freeze_bn)
+        resnet = ResNet50(input_tensor=image_input, include_top=False)
     elif backbone == 'resnet101':
-        resnet = resnet_models.ResNet101(image_input, include_top=False, freeze_bn=freeze_bn)
+        # resnet = resnet_models.ResNet101(image_input, include_top=False, freeze_bn=freeze_bn)
+        raise NotImplementedError
     else:
-        resnet = resnet_models.ResNet152(image_input, include_top=False, freeze_bn=freeze_bn)
+        # resnet = resnet_models.ResNet152(image_input, include_top=False, freeze_bn=freeze_bn)
+        raise NotImplementedError
 
     # (b, 16, 16, 2048)
     C5 = resnet.outputs[-1]

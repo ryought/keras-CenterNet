@@ -1,10 +1,11 @@
-from keras_resnet.models import ResNet18, ResNet34, ResNet50
-from keras.layers import Input, Conv2DTranspose, BatchNormalization, ReLU, Conv2D, Lambda, MaxPooling2D, Dropout
-from keras.layers import UpSampling2D, Concatenate
-from keras.models import Model
-from keras.initializers import normal, constant, zeros
-from keras.regularizers import l2
-import keras.backend as K
+# from keras_resnet.models import ResNet18, ResNet34, ResNet50
+from tensorflow.keras.applications.resnet50 import ResNet50
+from tensorflow.keras.layers import Input, Conv2DTranspose, BatchNormalization, ReLU, Conv2D, Lambda, MaxPooling2D, Dropout
+from tensorflow.keras.layers import UpSampling2D, Concatenate
+from tensorflow.keras.models import Model
+from tensorflow.keras.initializers import normal, constant, zeros
+from tensorflow.keras.regularizers import l2
+import tensorflow.keras.backend as K
 import tensorflow as tf
 
 from losses import loss
@@ -117,9 +118,11 @@ def centernet(num_classes, backbone='resnet50', input_size=512, max_objects=100,
     index_input = Input(shape=(max_objects,))
 
     if backbone == 'resnet18':
-        resnet = ResNet18(image_input, include_top=False, freeze_bn=True)
+        # resnet = ResNet18(image_input, include_top=False, freeze_bn=True)
+        raise NotImplementedError
     elif backbone == 'resnet34':
-        resnet = ResNet34(image_input, include_top=False, freeze_bn=True)
+        # resnet = ResNet34(image_input, include_top=False, freeze_bn=True)
+        raise NotImplementedError
     else:
         resnet = ResNet50(image_input, include_top=False, freeze_bn=True)
 

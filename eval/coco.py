@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import keras
+import tensorflow as tf
 from pycocotools.cocoeval import COCOeval
 import numpy as np
 import json
@@ -104,7 +104,7 @@ def evaluate_coco(generator, model, threshold=0.05):
     return coco_eval.stats
 
 
-class CocoEval(keras.callbacks.Callback):
+class CocoEval(tf.keras.callbacks.Callback):
     """ Performs COCO evaluation on each epoch.
     """
 

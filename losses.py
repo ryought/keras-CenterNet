@@ -1,6 +1,6 @@
 import tensorflow as tf
-import keras.backend as K
-from keras.losses import mean_absolute_error
+import tensorflow.keras.backend as K
+from tensorflow.keras.losses import mean_absolute_error
 
 
 def focal_loss(hm_pred, hm_true):

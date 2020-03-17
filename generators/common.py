@@ -1,5 +1,5 @@
 import cv2
-import keras
+import tensorflow as tf
 import math
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,7 +10,7 @@ from generators.utils import get_affine_transform, affine_transform
 from generators.utils import gaussian_radius, draw_gaussian, gaussian_radius_2, draw_gaussian_2
 
 
-class Generator(keras.utils.Sequence):
+class Generator(tf.keras.utils.Sequence):
     """
     Abstract generator class.
     """

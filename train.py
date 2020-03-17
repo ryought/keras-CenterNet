@@ -16,10 +16,8 @@ limitations under the License.
 
 import argparse
 from datetime import date, timedelta
-import keras
-import keras.backend as K
-from keras.optimizers import Adam, SGD
-import keras.preprocessing.image
+import tensorflow.keras.backend as K
+from tensorflow.keras.optimizers import Adam, SGD
 import os
 import sys
 import tensorflow as tf
@@ -68,7 +66,7 @@ def create_callbacks(training_model, prediction_model, validation_generator, arg
     tensorboard_callback = None
 
     if args.tensorboard_dir:
-        tensorboard_callback = keras.callbacks.TensorBoard(
+        tensorboard_callback = tf.keras.callbacks.TensorBoard(
             log_dir=args.tensorboard_dir,
             histogram_freq=0,
             batch_size=args.batch_size,
@@ -95,7 +93,7 @@ def create_callbacks(training_model, prediction_model, validation_generator, arg
     if args.snapshots:
         # ensure directory created first; otherwise h5py will error after epoch.
         makedirs(args.snapshot_path)
-        checkpoint = keras.callbacks.ModelCheckpoint(
+        checkpoint = tf.keras.callbacks.ModelCheckpoint(
             os.path.join(
                 args.snapshot_path,
                 '{dataset_type}_{{epoch:02d}}_{{loss:.4f}}_{{val_loss:.4f}}.h5'.format(dataset_type=args.dataset_type)
