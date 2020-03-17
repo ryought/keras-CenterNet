@@ -297,7 +297,7 @@ def main(args=None):
     if args.gpu:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
-    K.set_session(get_session())
+    # K.set_session(get_session())
 
     # create the generators
     train_generator, validation_generator = create_generators(args)
