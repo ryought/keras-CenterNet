@@ -102,6 +102,7 @@ def _get_detections(generator, model, score_threshold=0.05, max_detections=100, 
             inputs = np.expand_dims(image, axis=0)
         # run network
         detections = model.predict_on_batch(inputs)[0]
+        detections = detections.numpy()
         scores = detections[:, 4]
         # select indices which have a score above the threshold
         indices = np.where(scores > score_threshold)[0]
