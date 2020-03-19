@@ -65,11 +65,16 @@ def create_callbacks(training_model, prediction_model, validation_generator, arg
 
     tensorboard_callback = None
 
+    # in tfv2 the way for logging custom scalars was changed
+    # https://www.tensorflow.org/tensorboard/scalars_and_keras
     if args.tensorboard_dir:
+        file_writer = tf.summary.create_file_writer(
+            args.tensorboard_dir + "/metrics"
+        )
+        file_writer.set_as_default()
         tensorboard_callback = tf.keras.callbacks.TensorBoard(
             log_dir=args.tensorboard_dir,
             histogram_freq=0,
-            batch_size=args.batch_size,
             write_graph=True,
             write_grads=False,
             write_images=False,
