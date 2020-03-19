@@ -7,14 +7,12 @@ def focal_loss(hm_pred, hm_true):
     pos_mask = tf.cast(tf.equal(hm_true, 1), tf.float32)
     neg_mask = tf.cast(tf.less(hm_true, 1), tf.float32)
     neg_weights = tf.pow(1 - hm_true, 4)
-
     pos_loss = -K.log(tf.clip_by_value(hm_pred, 1e-4, 1. - 1e-4)) * tf.pow(1 - hm_pred, 2) * pos_mask
     neg_loss = -K.log(tf.clip_by_value(1 - hm_pred, 1e-4, 1. - 1e-4)) * tf.pow(hm_pred, 2) * neg_weights * neg_mask
 
-    num_pos = tf.reduce_sum(pos_mask)
-    pos_loss = tf.reduce_sum(pos_loss)
-    neg_loss = tf.reduce_sum(neg_loss)
-
+    num_pos  = tf.reduce_sum(pos_mask, axis=[1,2,3])
+    pos_loss = tf.reduce_sum(pos_loss, axis=[1,2,3])
+    neg_loss = tf.reduce_sum(neg_loss, axis=[1,2,3])
     cls_loss = tf.cond(tf.greater(num_pos, 0), lambda: (pos_loss + neg_loss) / num_pos, lambda: neg_loss)
     return cls_loss
 
