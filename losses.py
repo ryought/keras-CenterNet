@@ -13,7 +13,8 @@ def focal_loss(hm_pred, hm_true):
     num_pos  = tf.reduce_sum(pos_mask, axis=[1,2,3])
     pos_loss = tf.reduce_sum(pos_loss, axis=[1,2,3])
     neg_loss = tf.reduce_sum(neg_loss, axis=[1,2,3])
-    cls_loss = tf.cond(tf.greater(num_pos, 0), lambda: (pos_loss + neg_loss) / num_pos, lambda: neg_loss)
+    # cls_loss = tf.cond(tf.greater(num_pos, 0), lambda: (pos_loss + neg_loss) / num_pos, lambda: neg_loss)
+    cls_loss = tf.where(num_pos > 0, (pos_loss + neg_loss) / num_pos, neg_loss)
     return cls_loss
 
 
