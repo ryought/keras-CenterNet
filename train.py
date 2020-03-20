@@ -303,6 +303,15 @@ def main(args=None):
         os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 
     # K.set_session(get_session())
+    # tf.config.gpu.set_per_process_memory_growth(True)
+    physical_devices = tf.config.experimental.list_physical_devices('GPU')
+    print('phy', physical_devices)
+    if len(physical_devices) > 0:
+        for k in range(len(physical_devices)):
+            tf.config.experimental.set_memory_growth(physical_devices[k], True)
+            print('memory growth:', tf.config.experimental.get_memory_growth(physical_devices[k]))
+    else:
+        print("Not enough GPU hardware devices available")
 
     # create the generators
     train_generator, validation_generator = create_generators(args)
