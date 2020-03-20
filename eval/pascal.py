@@ -87,9 +87,9 @@ class Evaluate(tf.keras.callbacks.Callback):
         else:
             self.mean_ap = sum(precisions) / sum(x > 0 for x in total_instances)
 
-        if self.tensorboard is not None:
-            import tensorflow as tf
-            tf.summary.scalar('mAP', data=self.mean_ap, step=epoch)
+        # if self.tensorboard is not None:
+        #     import tensorflow as tf
+        #     tf.summary.scalar('mAP', data=self.mean_ap, step=epoch)
 
         logs['mAP'] = self.mean_ap
 
