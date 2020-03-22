@@ -24,7 +24,7 @@ import tensorflow as tf
 
 from augmentor.color import VisualEffect
 from augmentor.misc import MiscEffect
-from models.resnet import centernet
+from models.bin_resnet import centernet
 
 
 def makedirs(path):
@@ -328,8 +328,9 @@ def main(args=None):
 
     # freeze layers
     if args.freeze_backbone:
-        for i in range(190):
+        # for i in range(190):
         # for i in range(175):
+        for i in range(64):  # TODO determine its layers
             model.layers[i].trainable = False
 
     # compile model
